@@ -15,7 +15,7 @@ import (
 const (
 	defaultConsulPort  = 8500
 	defaultUpdateDelay = 1 * time.Second
-	metricsFile        = "/tmp/node-exporter/tcp_connections.prom" // Prometheus textfile directory
+	metricsFile        = "metrics/tcp_connections.prom" // Prometheus textfile directory
 )
 
 var (
