@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 5s  # Collect metrics every 5 seconds
+
+scrape_configs:
+  - job_name: "node_exporter"
+    static_configs:
+      - targets: ["devcontainer:9100"] # The Node-exporter

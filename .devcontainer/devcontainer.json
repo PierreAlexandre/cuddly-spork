@@ -1,0 +1,19 @@
+{
+	"name": "EdgeDB",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspaces",
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/apt-packages:1": {
+			"packages": "netcat-traditional socat"
+		}
+	},
+	"updateContentCommand": "go mod download",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go"
+			]
+		}
+	}
+}

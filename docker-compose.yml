@@ -1,0 +1,40 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devcontainer
+    volumes:
+      - .:/workspaces  s
+    working_dir: /workspaces
+    command: >
+      /bin/bash -c "
+      mkdir -p /workspaces/metrics && 
+      /usr/local/bin/node_exporter --collector.textfile.directory=/workspaces/metrics & 
+      python3 port-opener/port-opener.py --port 8500 --num-connections 200 --ipv 4"
+    networks:
+      - shared-network
+    environment:
+      - CONSUL_PORT=8500
+      - UPDATE_DELAY=1s
+    ports:
+      - "8500:8500"
+      - "9100:9100"  # Expose Node Exporter for Prometheus
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - shared-network
+    restart: always
+
+networks:
+  shared-network:
+    driver: bridge

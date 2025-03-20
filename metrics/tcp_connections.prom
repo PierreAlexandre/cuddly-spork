@@ -1,0 +1,3 @@
+# HELP tcp_connections Number of open TCP connections on port 8500
+# TYPE tcp_connections gauge
+tcp_connections{port="8500"} 0
