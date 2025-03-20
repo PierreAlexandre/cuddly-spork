@@ -19,6 +19,7 @@ This will:
 - Launch Prometheus for collecting metrics.
 
 #### 2. Manual Execution
+SSH inside the container and run
 ```sh
 go run .
 ```
